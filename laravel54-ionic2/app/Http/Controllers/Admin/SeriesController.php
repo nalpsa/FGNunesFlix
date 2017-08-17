@@ -63,7 +63,7 @@ class SeriesController extends Controller
         }
 
         $data = $form->getFieldValues();
-        $data['thumb'] = 'thumb.jpg';
+        $data['thumb'] = env('SERIE_NO_THUMB');
         Model::unguard();  // Isso vai tornar o fillable desabilitado
         $this->repository->create($data);
         $request->session()->flash('message', 'Serie Criada com Sucesso');
@@ -134,4 +134,9 @@ class SeriesController extends Controller
         $request->session()->flash('message', 'Série excluida com Sucesso');
         return redirect()->route('admin.series.index');
     }
+
+    public function thumbAsset(Serie $serie){
+        return response()->download($serie->thumb_path);
+    }
+
 }

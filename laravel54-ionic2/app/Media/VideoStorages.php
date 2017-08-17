@@ -11,7 +11,7 @@ trait VideoStorages
      * @return \Illuminate\Filesystem\FilesystemAdapter
      */
     public function getStorage(){
-        \Storage::disk($this->getDiskDriver());
+        return \Storage::disk($this->getDiskDriver());
     }
     protected function getDiskDriver(){ // driver
         return config('filesystems.default');
